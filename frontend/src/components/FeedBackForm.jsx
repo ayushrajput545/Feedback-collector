@@ -41,7 +41,7 @@ const FeedBackForm = () => {
             return;
         }
 
-        const response = await axios.post('http://localhost:8080/api/v1/submit-feedback' , formData)
+        const response = await axios.post('https://feedback-collector-4s6x.onrender.com/api/v1/submit-feedback' , formData)
         console.log(response)
         toast.success("Thank You for Feedback !")
         setFormData({

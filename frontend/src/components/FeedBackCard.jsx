@@ -14,7 +14,7 @@ const FeedBackCard = ({data , getFeedbacks}) => {
             
             console.log( "id is",id)
             console.log(data)
-            const response = await axios.post('http://localhost:8080/api/v1/deletefeedback', {id})
+            const response = await axios.post('https://feedback-collector-4s6x.onrender.com/api/v1/deletefeedback', {id})
             // console.log(response)
             toast.success("FeedBack Deleted")
             getFeedbacks()

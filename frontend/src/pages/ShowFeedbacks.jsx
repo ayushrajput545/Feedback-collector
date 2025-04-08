@@ -17,7 +17,7 @@ const ShowFeedbacks = () => {
     
             try{
     
-                const response = await axios.get('http://localhost:8080/api/v1/feedbacks')
+                const response = await axios.get('https://feedback-collector-4s6x.onrender.com/api/v1/feedbacks')
                 // console.log(response)
                 setData(response.data.feedbacks)
     

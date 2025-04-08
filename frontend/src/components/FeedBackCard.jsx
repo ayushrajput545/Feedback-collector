@@ -1,27 +1,72 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast';
 import { MdDeleteForever } from "react-icons/md";
+import { formatDistanceToNow } from 'date-fns';
 
-const FeedBackCard = () => {
-  return (
-    <div className=''>
+const FeedBackCard = ({data , getFeedbacks}) => {
 
-        <div className='md:w-6/12 w-full  bg-[#2A2B35] flex gap-5 justify-between items-center p-4 rounded-lg mx-auto'>
-          
-          <div className='flex flex-col gap-5'>
-            <div>
-              <h1 className='font-semibold text-xl'>Ayush Rajput</h1>
-              <h2 className='text-slate-300'>rajputayush694@gmail.caom</h2>
-              <h2 className='text-slate-300'>12 Feb 2023</h2>
 
-            </div>
-             
-            <h3 className='text-slate-400'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</h3>
-          </div>
+
+    async function handleDelete(id){
+        const toastid = toast.loading("Loading...")
+        try{
             
-            <div className='bg-red-400 text-3xl rounded-full p-2 cursor-pointer'>
-               <MdDeleteForever />
+            console.log( "id is",id)
+            console.log(data)
+            const response = await axios.post('http://localhost:8080/api/v1/deletefeedback', {id})
+            // console.log(response)
+            toast.success("FeedBack Deleted")
+            getFeedbacks()
+
+        }
+        catch(err){
+            console.log("ERROR IN DELETEING ...", err)
+
+        }
+        toast.dismiss(toastid)
+    }
+
+
+    if(data?.length ===0){
+        return (
+            <div className='text-center flex justify-center items-center  h-[500px] font-bold text-slate-400 text-2xl'>
+                No FeedBacks
             </div>
+        )
+    }
+
+
+   
+  return (
+
+
+    <div className='flex flex-col gap-5'>
+
+      {
+        data?.map((item,i)=>(
+
+            <div key={i} className='md:w-6/12 w-full  bg-[#2A2B35] flex gap-5 justify-between items-center p-4 rounded-lg mx-auto'>
+          
+                <div className='flex flex-col gap-5'>
+                    <div>
+                        <h1 className='font-semibold text-xl'>{item.name}</h1>
+                        <h2 className='text-slate-300'>{item.email}</h2>
+                        <h2 className='text-slate-300 text-sm'>{formatDistanceToNow(new Date(item.date), { addSuffix: true })}</h2>
+
+                    </div>
+                        
+                    <h3 className='text-slate-400'>{item.message}</h3>
+                </div>
+                
+                <div onClick={()=>handleDelete(item._id)} className='bg-red-400 text-3xl rounded-full p-2 cursor-pointer'>
+                    <MdDeleteForever />
+                </div>
         </div>
+
+        ))
+      }
+         
     </div>
   )
 }

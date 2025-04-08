@@ -63,7 +63,11 @@ const FeedBackForm = () => {
             <input onChange={changeHandler} value={formData.name} name='name' placeholder='YOUR FULL NAME' type="text" className='w-full p-4 rounded-full bg-[#2A2B35] outline-none' />
             <input onChange={changeHandler} value={formData.email} name='email' placeholder='YOUR EMAIL' type="text" className='w-full p-4 rounded-full bg-[#2A2B35] outline-none' />
             <textarea onChange={changeHandler} value={formData.message} name='message' placeholder='Message Here...' className='w-full h-60 resize-none p-4 rounded-[30px] bg-[#2A2B35] outline-none ' />
-            <button type='submit' className=' border p-3 rounded-lg  font-semibold hover:scale-95 transition-all duration-200 border-[#27AE60] hover:border-[#1e8348]'>Submit Message</button>
+            <div className='flex justify-between'>
+              <button type='submit' className=' border p-3 rounded-lg  font-semibold hover:scale-95 transition-all duration-200 border-[#27AE60] hover:border-[#1e8348]'>Submit Message</button>
+              <p className='font-bold text-slate-400 text-2xl'>Credit: Ayush Rajput</p>
+            </div>
+             
 
         </form>
 
